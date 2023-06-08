@@ -14,12 +14,14 @@ puts "🌱 Seeding..."
   last_name = Faker::Name.last_name
   email = Faker::Internet.email
   phone_number = Faker::PhoneNumber.phone_number_with_country_code
+  employee_id = Faker::Number.between(from: 1, to: 7)
 
   Client.create(
     first_name: first_name,
     last_name: last_name,
     email: email,
-    phone_number: phone_number
+    phone_number: phone_number,
+    employee_id: employee_id
   )
 end
 
@@ -28,43 +30,50 @@ employee = Employee.create([
         first_name: "David",
         last_name: "Mutembei",
         location: "Tala",
-        email: "david@gmail.com"
+        email: "david@gmail.com",
+        client_id: balance = Faker::Number.between(from: 1, to: 20)
     },
     {
         first_name: "Morris",
         last_name: "Obama",
         location: "Nguluni",
-        email: "morris@gmail.com"
+        email: "morris@gmail.com",
+        client_id: balance = Faker::Number.between(from: 1, to: 20)
     },
     {
         first_name: "Tom",
         last_name: "Mutisya",
         location: "Kathithyamaa",
-        email: "tom@gmail.com"
+        email: "tom@gmail.com",
+        client_id: balance = Faker::Number.between(from: 1, to: 20)
     },
     {
         first_name: "Ngusya",
         last_name: "Mule",
         location: "Kangundo",
-        email: "mule@gmail.com"
+        email: "mule@gmail.com",
+        client_id: balance = Faker::Number.between(from: 1, to: 20)
     },
     {
         first_name: "Grace",
         last_name: "Kalondu",
         location: "Tala",
-        email: "grace@gmail.com"
+        email: "grace@gmail.com",
+        client_id: balance = Faker::Number.between(from: 1, to: 20)
     },
     {
         first_name: "Rama",
         last_name: "Scholes",
         location: "Kangundo",
-        email: "rama@gmail.com"
+        email: "rama@gmail.com",
+        client_id: balance = Faker::Number.between(from: 1, to: 20)
     },
     {
         first_name: "Moses",
         last_name: "Mwanzia",
         location: "Nguluni",
-        email: "mose@gmail.com"
+        email: "mose@gmail.com",
+        client_id: balance = Faker::Number.between(from: 1, to: 20)
     },
 ])
 

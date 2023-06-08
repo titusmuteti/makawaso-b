@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_08_152025) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_08_171216) do
   create_table "bills", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.date "date_read"
     t.integer "previous_reading"
@@ -30,6 +30,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_152025) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "employees_id"
+    t.integer "employee_id"
+    t.index ["employees_id"], name: "index_clients_on_employees_id"
   end
 
   create_table "employees", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -39,6 +42,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_152025) do
     t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "client_id"
+    t.bigint "clients_id"
+    t.index ["clients_id"], name: "index_employees_on_clients_id"
   end
 
+  add_foreign_key "clients", "employees", column: "employees_id"
+  add_foreign_key "employees", "clients", column: "clients_id"
 end
