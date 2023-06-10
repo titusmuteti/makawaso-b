@@ -23,12 +23,12 @@ class EmployeesController < ApplicationController
     def destroy
         employee = Employee.find(params[:id])
         employee.destroy
-        render json: {message: "Trainer deleted"}, status: :ok
+        render json: {message: "Employee deleted"}, status: :ok
     end
 
     private
 
     def employee_params
-        params.permit(:firstname, :lastname, :location)
+        params.permit(:firstname, :lastname, :email, :location)
     end
 end
