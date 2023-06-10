@@ -1,7 +1,6 @@
 class Client < ApplicationRecord
     # has_secure_password
 
-    has_many :bills 
     has_many :employee_clients
     has_many :employees, through: :employee_clients, class_name: 'Employee'
 
