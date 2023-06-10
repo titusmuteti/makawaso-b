@@ -4,7 +4,7 @@ class ClientsController < ApplicationController
 
             def index
                 clients = Client.all
-                render json: clients, include: [:employees, :bills],  status: :ok
+                render json: clients, include: [:employees],  status: :ok
             end
         
             def show
@@ -45,7 +45,7 @@ class ClientsController < ApplicationController
             private
         
             def client_params
-                params.permit(:firstname, :lastname, :email, :password, :password_confirmation, :phone_number)
+                params.permit(:firstname, :lastname, :email, :phone_number)
             end
         
             def record_invalid
