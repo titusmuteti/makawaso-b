@@ -70,7 +70,6 @@ puts "🌱 Seeding..."
 # ])
 
 CITY_NAMES = ['Tala', 'Nguluni', 'Kathithyamaa']
-# location = CITY_NAMES.sample
 
 
 20.times do
