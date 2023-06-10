@@ -1,11 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
-
 require 'faker'
 puts "🌱 Seeding..."
 
@@ -77,13 +69,14 @@ employee = Employee.create([
     },
 ])
 
-20.times do
+30.times do
     date_read = Faker::Date.backward(days: 14)
     previous_reading = Faker::Number.between(from: 15, to: 100) 
     current_reading = Faker::Number.between(from: 20, to: 200) 
     balance = Faker::Number.between(from: 5, to: 1000) 
     paid = Faker::Boolean.boolean 
     date_paid = Faker::Date.forward(days: 14)
+    client_id = Faker::Number.between(from: 1, to: 20)
   
     Bill.create(
         date_read: date_read,
@@ -91,7 +84,8 @@ employee = Employee.create([
         current_reading: current_reading,
         balance: balance,
         paid: paid,
-        date_paid: date_paid
+        date_paid: date_paid,
+        client_id: client_id
     )
   end
   

@@ -4,7 +4,7 @@ class ClientsController < ApplicationController
 
             def index
                 clients = Client.all
-                render json: clients,  status: :ok
+                render json: clients, include: [:employees, :bills],  status: :ok
             end
         
             def show
