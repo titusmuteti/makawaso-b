@@ -45,7 +45,7 @@ class ClientsController < ApplicationController
             private
         
             def client_params
-                params.permit(:firstname, :lastname, :email, :password, :password_confirmation, :phone_number, :premise_id)
+                params.permit(:firstname, :lastname, :email, :password, :password_confirmation, :phone_number)
             end
         
             def record_invalid
