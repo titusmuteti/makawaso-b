@@ -1,3 +1,4 @@
 class Employee < ApplicationRecord
-    has_and_belongs_to_many :clients
+    has_many :employee_clients
+    has_many :clients, through: :employee_clients, class_name: 'Client'
 end

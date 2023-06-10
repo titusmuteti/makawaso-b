@@ -2,7 +2,8 @@ class Client < ApplicationRecord
     # has_secure_password
 
     has_many :bills 
-    has_and_belongs_to_many :employees
+    has_many :employee_clients
+    has_many :employees, through: :employee_clients, class_name: 'Employee'
 
     validates :first_name, presence: true
     validates :last_name, presence: true
