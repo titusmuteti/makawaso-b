@@ -91,7 +91,8 @@ CITY_NAMES = ['Tala', 'Nguluni', 'Kathithyamaa']
       first_name: first_name,
       last_name: last_name,
       email: email,
-      phone_number: phone_number
+      phone_number: phone_number,
+      password: '12345678',
     )
     # employee.update(client_id: client.id)
 
