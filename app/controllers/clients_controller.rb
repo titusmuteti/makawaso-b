@@ -1,7 +1,7 @@
+# app/controllers/clients_controller.rb
 class ClientsController < ApplicationController
-    # skip_before_action :authorize, only: :create
-    # before_action :authorize
-    rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
+    # skip_before_action :verify_authenticity_token, only: [:create, :index]
+    # before_action :authenticate_user, except: [:create]
   
     def index
       clients = Client.all
@@ -53,11 +53,20 @@ class ClientsController < ApplicationController
     private
   
     def client_params
-      params.permit(:first_name, :last_name, :email, :phone_number)
+        params.permit(:first_name, :last_name, :email, :phone_number, :password)
     end
   
-    # def authorize
-    #   render json: { error: "Not authorized" }, status: :unauthorized unless current_user
+    # def authenticate_user
+    #   render json: { error: "Not authorized" }, status: :unauthorized unless logged_in?
     # end
+  
+    def logged_in?
+      !!current_user
+    end
+  
+    def current_user
+        @current_user ||= Client.find_by(id: session[:user_id]) if session[:user_id]
+    end
+
   end
   
