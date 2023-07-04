@@ -1,7 +1,5 @@
-# app/controllers/clients_controller.rb
 class ClientsController < ApplicationController
-    # skip_before_action :verify_authenticity_token, only: [:create, :index]
-    # before_action :authenticate_user, except: [:create]
+    rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
   
     def index
       clients = Client.all
@@ -9,36 +7,38 @@ class ClientsController < ApplicationController
     end
   
     def show
-      client = Client.find_by_id(params[:id])
+      client = Client.find_by_id(session[:client_id])
       if client
-        render json: client, status: :ok
+        render json: client, include: [:employees], status: :ok
       else
-        render json: { error: "Client not found" }, status: :not_found
+        render json: { error: "You must be logged in to access this content" }, status: :unauthorized
       end
     end
   
     def create
       client = Client.new(client_params)
+      
       if client.save
-        session[:user_id] = client.id
+        # byebug
+        session[:client_id] = client.id
         render json: client, status: :created
       else
-        render json: { errors: client.errors.full_messages }, status: :unprocessable_entity
+        render json: { error: client.errors.full_messages }, status: :unprocessable_entity
       end
     end
   
-    def update
-      client = Client.find_by_id(params[:id])
-      if client
-        if client.update(client_params)
-          render json: client, status: :ok
-        else
-          render json: { errors: client.errors.full_messages }, status: :unprocessable_entity
-        end
-      else
-        render json: { error: "Client not found" }, status: :not_found
-      end
-    end
+    # def update
+    #   client = Client.find_by_id(params[:id])
+    #   if client
+    #     if client.update(client_params)
+    #       render json: client, status: :ok
+    #     else
+    #       render json: { errors: client.errors.full_messages }, status: :unprocessable_entity
+    #     end
+    #   else
+    #     render json: { error: "Client not found" }, status: :not_found
+    #   end
+    # end
   
     def destroy
       client = Client.find_by_id(params[:id])
@@ -53,20 +53,12 @@ class ClientsController < ApplicationController
     private
   
     def client_params
-        params.permit(:first_name, :last_name, :email, :phone_number, :password)
-    end
-  
-    # def authenticate_user
-    #   render json: { error: "Not authorized" }, status: :unauthorized unless logged_in?
-    # end
-  
-    def logged_in?
-      !!current_user
-    end
-  
-    def current_user
-        @current_user ||= Client.find_by(id: session[:user_id]) if session[:user_id]
+      params.permit(:email, :first_name, :last_name, :phone_number, :password, :confirm_password)
     end
 
-  end
+    def record_invalid
+      render json: {error: "Invalid user"}, status: :unprocessable_entity
+    end
+
+end
   

@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   post "/signup", to: "clients#create"
   get "/me", to: "clients#show"
 
+  # match '*unmatched_route', to: 'application#handle_options_request', via: :options
+
 end

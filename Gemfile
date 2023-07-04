@@ -86,4 +86,4 @@ group :development, :test do
 end
 
 gem 'jwt', '~> 2.2.2'
-gem 'rack-cors', '~> 1.1.1'
+gem 'rack-cors', :require => 'rack/cors'

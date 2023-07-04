@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
-    # skip_before_action :authorize, only: :create
-  
+    before_action :authenticate_user!, except: :create
+
     def create
       user = Client.find_by(email: params[:email])
       if user&.authenticate(params[:password])
@@ -19,5 +19,13 @@ class SessionsController < ApplicationController
         render json: { error: "You must be logged in" }, status: :unauthorized
       end
     end
-  end
+  
+    private
+  
+    def authenticate_user!
+        unless user_signed_in?
+          render json: { error: "Not authorized" }, status: :unauthorized
+        end
+    end
+end
   
