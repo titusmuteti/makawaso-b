@@ -7,19 +7,18 @@ class ApplicationController < ActionController::Base
 
   include ActionController::Cookies
   
-  # before_action :authorize
   
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
 
 
-    def authorize
-        redirect_to login_path unless current_user
-    end
+    # def authorize
+    #     redirect_to login_path unless logged_in?
+    # end
 
     # def authorize
     #     # byebug
-    #     @current_user = User.find_by_id(session[:user_id])
+    #     @current_user = Client.find_by_id(session[:user_id])
     #     render json: { errors: ["Not authorized"] }, status: :unauthorized unless @current_user
     # end
 

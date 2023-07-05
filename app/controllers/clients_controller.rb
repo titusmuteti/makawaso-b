@@ -7,8 +7,9 @@ class ClientsController < ApplicationController
     end
   
     def show
-      client = Client.find_by_id(session[:client_id])
+      client = Client.find_by_id(id: session[:client_id])
       if client
+        # byebug
         render json: client, include: [:employees], status: :ok
       else
         render json: { error: "You must be logged in to access this content" }, status: :unauthorized
